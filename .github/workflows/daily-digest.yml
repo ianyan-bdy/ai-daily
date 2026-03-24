@@ -1,0 +1,29 @@
+name: daily-digest
+
+on:
+  schedule:
+    - cron: "0 5 * * *"   # UTC 01:00 = 北京时间 13:00
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Generate digest
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          bun scripts/digest.ts --hours 48 --top-n 15 --lang zh --output ./digest.md
+
+      - name: Push to Lark
+        env:
+          LARK_WEBHOOK: ${{ secrets.LARK_WEBHOOK }}
+        run: |
+          bun scripts/push-to-lark.ts
