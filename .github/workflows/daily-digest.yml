@@ -2,7 +2,7 @@ name: daily-digest
 
 on:
   schedule:
-    - cron: "0 2 * * *"
+    - cron: "0 1 * * *"
   workflow_dispatch:
 
 jobs:
@@ -16,11 +16,17 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Generate digest
+      - name: Generate markdown digest
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          bun scripts/digest.ts --hours 48 --top-n 15 --lang zh --output ./digest.md
+          bun scripts/digest.ts --hours 48 --top-n 15 --lang zh --output ./output/digest.md
+
+      - name: Convert digest to JSON
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          bun scripts/digest-json.ts
 
       - name: Push to Lark
         env:
