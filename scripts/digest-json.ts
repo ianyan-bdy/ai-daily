@@ -88,9 +88,11 @@ const prompt = `
 ${rawContent}
 `.trim();
 
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+
 async function callGemini(promptText: string): Promise<string> {
     const endpoint =
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent";
+        `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
     const resp = await fetch(`${endpoint}?key=${GEMINI_API_KEY}`, {
         method: "POST",
@@ -120,8 +122,7 @@ async function callGemini(promptText: string): Promise<string> {
     }
 
     const data = await resp.json();
-    const text =
-        data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!text) {
         throw new Error("Gemini returned empty content");

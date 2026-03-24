@@ -25,6 +25,7 @@ jobs:
       - name: Convert digest to JSON
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: gemini-2.5-flash
         run: |
           bun scripts/digest-json.ts
 
