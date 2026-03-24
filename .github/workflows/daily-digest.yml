@@ -2,7 +2,7 @@ name: daily-digest
 
 on:
   schedule:
-    - cron: "0 5 * * *"   # UTC 01:00 = 北京时间 13:00
+    - cron: "0 2 * * *"
   workflow_dispatch:
 
 jobs:
