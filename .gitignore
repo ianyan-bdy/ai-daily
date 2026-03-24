@@ -1,0 +1,71 @@
+######################################################################
+# Build tools
+
+# Maven
+/target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+######################################################################
+# IDE settings
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse / STS
+.classpath
+.project
+.settings/
+.apt_generated
+.factorypath
+.springBeans
+
+# VSCode
+.vscode/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+nbdist/
+.nb-gradle/
+
+######################################################################
+# OS / Editor files
+
+.DS_Store
+*.DS_Store
+*.swp
+*.swo
+*~
+
+######################################################################
+# Java / Runtime files
+
+*.log
+*.class
+*.war
+*.ear
+
+# Backup & temp
+*.xml.versionsBackup
+*.flattened-pom.xml
+*.egg-info/
+__pycache__/
+dist/
+venv/
+
+######################################################################
+# Rebell / hot deploy
+rebel.xml
+
+######################################################################
+# Logs
+/logs/
